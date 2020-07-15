@@ -7,6 +7,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "engines": {
+    "node": "12.16.2",
+    "npm": "6.14.6"
+  },
   "keywords": [
     "MongoDB",
     "Express",
