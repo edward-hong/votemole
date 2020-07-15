@@ -4,6 +4,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
+const TwitterStrategy = require('passport-twitter').Strategy
 
 const User = mongoose.model('users')
 
@@ -53,6 +54,28 @@ passport.use(
           done(null, existingUser)
         } else {
           new User({ facebookId: profile.id })
+            .save()
+            .then((user) => done(null, user))
+        }
+      })
+    },
+  ),
+)
+
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: process.env.TWITTER_API_KEY,
+      consumerSecret: process.env.TWITTER_API_SECRET_KEY,
+      callbackURL: '/auth/twitter/callback',
+      proxy: true,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      User.findOne({ twitterId: profile.id }).then((existingUser) => {
+        if (existingUser) {
+          done(null, existingUser)
+        } else {
+          new User({ twitterId: profile.id })
             .save()
             .then((user) => done(null, user))
         }

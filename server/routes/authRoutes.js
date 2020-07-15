@@ -16,6 +16,10 @@ router.get('/facebook', passport.authenticate('facebook'))
 
 router.get('/facebook/callback', passport.authenticate('facebook'))
 
+router.get('/twitter', passport.authenticate('twitter'))
+
+router.get('/twitter/callback', passport.authenticate('twitter'))
+
 router.get('/logout', (req, res) => {
   req.logout()
   res.send(req.user)
