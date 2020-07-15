@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "server": "nodemon server/index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently -n server,client \"npm run server\" \"npm run client\""
   },
   "engines": {
     "node": "12.16.2",
@@ -32,6 +34,7 @@
     "passport-twitter": "^1.0.4"
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "nodemon": "^2.0.4"
   }
 }
