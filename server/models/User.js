@@ -5,6 +5,7 @@ const userSchema = new Schema({
   googleId: String,
   facebookId: String,
   twitterId: String,
+  githubId: String,
 })
 
 mongoose.model('users', userSchema)

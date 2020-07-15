@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
 const TwitterStrategy = require('passport-twitter').Strategy
+const GithubStrategy = require('passport-github2').Strategy
 
 const User = mongoose.model('users')
 
@@ -76,6 +77,28 @@ passport.use(
           done(null, existingUser)
         } else {
           new User({ twitterId: profile.id })
+            .save()
+            .then((user) => done(null, user))
+        }
+      })
+    },
+  ),
+)
+
+passport.use(
+  new GithubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: '/auth/github/callback',
+      proxy: true,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      User.findOne({ githubId: profile.id }).then((existingUser) => {
+        if (existingUser) {
+          done(null, existingUser)
+        } else {
+          new User({ githubId: profile.id })
             .save()
             .then((user) => done(null, user))
         }

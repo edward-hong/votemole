@@ -20,6 +20,10 @@ router.get('/twitter', passport.authenticate('twitter'))
 
 router.get('/twitter/callback', passport.authenticate('twitter'))
 
+router.get('/github', passport.authenticate('github'))
+
+router.get('/github/callback', passport.authenticate('github'))
+
 router.get('/logout', (req, res) => {
   req.logout()
   res.send(req.user)
