@@ -1,0 +1,25 @@
+{
+  "name": "votemole-server",
+  "version": "1.0.0",
+  "description": "A polling app made with the MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "React",
+    "Node",
+    "MERN"
+  ],
+  "author": "Edward Hong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
