@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
   Collapse,
@@ -8,6 +9,9 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Modal,
+  ModalBody,
+  Button,
 } from 'reactstrap'
 import styled from 'styled-components'
 
@@ -33,7 +37,7 @@ const BrandLink = styled(Link)`
     color: ${PRIMARY_COLOR};
   }
 `
-const Hamburger = styled(NavbarToggler)`
+const Hamburger = styled(({ isOpen, ...rest }) => <NavbarToggler {...rest} />)`
   && {
     color: ${PRIMARY_COLOR};
     width: 56px;
@@ -74,30 +78,130 @@ const Hamburger = styled(NavbarToggler)`
     }
   }
 `
+const LoginButton = styled(Button)`
+  && {
+    color: ${({ color }) => color};
+    border-color: ${({ color }) => color};
+
+    &:focus {
+      box-shadow: ${({ shadow }) => `${shadow} 0px 0px 0px 3px`};
+    }
+
+    &:hover {
+      background-color: ${({ color }) => color};
+      color: white;
+    }
+  }
+`
+
+const NavListItem = styled(NavItem)`
+  text-align: center;
+`
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [modal, setModal] = useState(false)
+  const auth = useSelector(({ auth }) => auth)
 
   const toggle = () => setIsOpen(!isOpen)
+  const toggleModal = () => setModal(!modal)
+
+  const openModal = (e) => {
+    e.preventDefault()
+    toggleModal()
+  }
+
+  const renderNavItems = () => {
+    switch (auth) {
+      case null:
+        return
+      case false:
+        return (
+          <NavListItem>
+            <NavLink onClick={openModal} href="#">
+              Login
+            </NavLink>
+          </NavListItem>
+        )
+      default:
+        return (
+          <>
+            <NavListItem>
+              <NavLink href="/auth/logout">My Polls</NavLink>
+            </NavListItem>
+            <NavListItem>
+              <NavLink href="/auth/logout">Add Polls</NavLink>
+            </NavListItem>
+            <NavListItem>
+              <NavLink href="/auth/logout">Logout</NavLink>
+            </NavListItem>
+          </>
+        )
+    }
+  }
 
   return (
-    <NavigationBar light expand="md">
-      <NavbarBrand tag={BrandLink} to="/">
-        <BrandImg
-          src="https://res.cloudinary.com/avatarhzh/image/upload/v1509887327/build-a-voting-app/logo.svg"
-          alt="vote mole logo"
-        />
-        VoteMole
-      </NavbarBrand>
-      <Hamburger isOpen={isOpen} onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink href="#">Login</NavLink>
-          </NavItem>
-        </Nav>
-      </Collapse>
-    </NavigationBar>
+    <>
+      <NavigationBar light expand="md">
+        <NavbarBrand tag={BrandLink} to="/">
+          <BrandImg
+            src="https://res.cloudinary.com/avatarhzh/image/upload/v1509887327/build-a-voting-app/logo.svg"
+            alt="vote mole logo"
+          />
+          VoteMole
+        </NavbarBrand>
+        <Hamburger isOpen={isOpen} onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            {renderNavItems()}
+          </Nav>
+        </Collapse>
+      </NavigationBar>
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalBody>
+          <LoginButton
+            color="rgb(236, 55, 27)"
+            shadow="rgb(236, 55, 27, 0.5)"
+            block
+            outline
+            tag="a"
+            href="/auth/google"
+          >
+            Login with Google
+          </LoginButton>
+          <LoginButton
+            color="rgb(64, 96, 183)"
+            shadow="rgb(64, 96, 183, 0.5)"
+            block
+            outline
+            tag="a"
+            href="/auth/facebook"
+          >
+            Login with Facebook
+          </LoginButton>
+          <LoginButton
+            color="rgb(0, 156, 250)"
+            shadow="rgb(0, 156, 250, 0.5)"
+            block
+            outline
+            tag="a"
+            href="/auth/twitter"
+          >
+            Login with Twitter
+          </LoginButton>
+          <LoginButton
+            color="rgb(36, 41, 47)"
+            shadow="rgb(36, 41, 47, 0.5)"
+            block
+            outline
+            tag="a"
+            href="/auth/github"
+          >
+            Login with Github
+          </LoginButton>
+        </ModalBody>
+      </Modal>
+    </>
   )
 }
 

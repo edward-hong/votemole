@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import Header from './components/Header'
 import Landing from './pages/Landing'
+import { fetchUser } from './state/actions'
 import { PRIMARY_COLOR } from './constants'
 
 const Wrapper = styled.div`
@@ -24,16 +26,22 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const App = () => (
-  <Wrapper>
-    <BrowserRouter>
-      <>
-        <Header />
-        <Route exact path="/" component={Landing} />
-      </>
-    </BrowserRouter>
-    <GlobalStyle />
-  </Wrapper>
-)
+const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [dispatch])
+  return (
+    <Wrapper>
+      <BrowserRouter>
+        <>
+          <Header />
+          <Route exact path="/" component={Landing} />
+        </>
+      </BrowserRouter>
+      <GlobalStyle />
+    </Wrapper>
+  )
+}
 
 export default App

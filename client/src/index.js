@@ -5,10 +5,11 @@ import { createStore, applyMiddleware } from 'redux'
 import reduxThunk from 'redux-thunk'
 
 import App from './App'
+import reducers from './state/reducers'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as serviceWorker from './serviceWorker'
 
-const store = createStore(() => [], {}, applyMiddleware(reduxThunk))
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk))
 
 ReactDOM.render(
   <Provider store={store}>
