@@ -5,6 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 import Header from './components/Header'
 import Landing from './pages/Landing'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 import { fetchUser } from './state/actions'
 import { PRIMARY_COLOR } from './constants'
 
@@ -37,6 +38,7 @@ const App = () => {
         <>
           <Header />
           <Route exact path="/" component={Landing} />
+          <Route path="/privacy_policy" component={PrivacyPolicy} />
         </>
       </BrowserRouter>
       <GlobalStyle />
