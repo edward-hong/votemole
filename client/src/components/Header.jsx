@@ -127,10 +127,10 @@ const Header = () => {
         return (
           <>
             <NavListItem>
-              <NavLink href="/auth/logout">My Polls</NavLink>
+              <NavLink href="#">My Polls</NavLink>
             </NavListItem>
             <NavListItem>
-              <NavLink href="/auth/logout">Add Polls</NavLink>
+              <NavLink href="#">Add Polls</NavLink>
             </NavListItem>
             <NavListItem>
               <NavLink href="/auth/logout">Logout</NavLink>
