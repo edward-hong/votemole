@@ -76,4 +76,31 @@ router.delete('/delete/:id', (req, res) => {
     })
 })
 
+router.put('/vote', (req, res) => {
+  Poll.findById(req.body.id)
+    .then((poll) => {
+      const index = poll.pollOptions
+        .map(({ option }) => option)
+        .indexOf(req.body.selection)
+      if (index > -1) {
+        poll.pollOptions[index].votes++
+      } else {
+        poll.pollOptions.push({ option: req.body.customSelection, votes: 1 })
+      }
+      poll
+        .save()
+        .then((savedPoll) => {
+          res.send(savedPoll)
+        })
+        .catch((err) => {
+          console.error(err.message)
+          res.status(500).send('Server Error')
+        })
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send('Server Error')
+    })
+})
+
 module.exports = router

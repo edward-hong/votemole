@@ -44,6 +44,7 @@ export const votePollEpic = (action$) =>
         map(({ response, status }) => {
           if (equals(status, 200)) {
             if (is(Object, response)) {
+              console.log(response)
               return dispatchUpdatedPollReceived(response)
             } else {
               const errorMessage = "You've already voted on this poll"
