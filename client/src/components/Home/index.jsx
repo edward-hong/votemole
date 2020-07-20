@@ -36,6 +36,8 @@ const Home = () => {
     )
   }
 
+  console.log(polls)
+
   return (
     <Container fluid>
       <MainHeading>VoteMole</MainHeading>
