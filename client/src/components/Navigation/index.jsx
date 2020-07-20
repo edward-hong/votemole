@@ -27,6 +27,10 @@ const Hamburger = styled(NavbarToggler)`
     position: relative;
     line-height: 50px;
 
+    &:focus {
+      outline: 5px auto ${COLOURS.primary};
+    }
+
     /* hamburger animation */
     span {
       background-image: none;
