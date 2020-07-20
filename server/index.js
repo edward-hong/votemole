@@ -5,9 +5,11 @@ const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
 
-const authRoutes = require('./routes/authRoutes')
-
 require('./models/User')
+require('./models/Poll')
+
+const authRoutes = require('./routes/authRoutes')
+const pollRoutes = require('./routes/pollRoutes')
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -28,7 +30,8 @@ app.use(passport.session())
 
 require('./services/passport')
 
-app.use('/auth', authRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/poll', pollRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
