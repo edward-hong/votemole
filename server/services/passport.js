@@ -24,7 +24,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL: '/api/auth/google/callback',
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
@@ -46,7 +46,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: '/auth/facebook/callback',
+      callbackURL: '/api/auth/facebook/callback',
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
@@ -68,7 +68,7 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_API_KEY,
       consumerSecret: process.env.TWITTER_API_SECRET_KEY,
-      callbackURL: '/auth/twitter/callback',
+      callbackURL: '/api/auth/twitter/callback',
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
@@ -90,7 +90,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: '/auth/github/callback',
+      callbackURL: '/api/auth/github/callback',
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
