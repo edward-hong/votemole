@@ -54,7 +54,7 @@ const AddPollModal = ({
       ({ response }) => {
         toggleExpandNav()
         cancel()
-        history.push(`${POLL_BRANCH_PATH}${response}`)
+        history.push(`${POLL_BRANCH_PATH}${response.id}`)
         alert.success('Poll submitted!')
       },
       ({ status }) => {

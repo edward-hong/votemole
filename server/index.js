@@ -28,6 +28,8 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use(express.json())
+
 require('./services/passport')
 
 app.use('/api/auth', authRoutes)
