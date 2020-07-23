@@ -5,7 +5,7 @@ const pollSchema = new Schema({
   ip: [String],
   userId: { type: String, required: true },
   pollQuestion: { type: String, required: true },
-  pollOptions: [{ votes: Number, option: String }],
+  pollOptions: [{ votes: { type: Number, default: 0 }, option: String }],
 })
 
 mongoose.model('polls', pollSchema)
