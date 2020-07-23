@@ -38,9 +38,8 @@ const Close = styled.button`
 `
 const StatusIcon = styled(FontAwesome)`
   display: inline-block;
-  position: absolute;
-  left: 25px;
-  top: 36px;
+  position: relative;
+  margin-right: 5px;
 `
 
 const AlertTemplate = ({ style, options, message, close }) => (
