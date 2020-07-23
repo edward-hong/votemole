@@ -85,7 +85,16 @@ router.put('/vote', (req, res) => {
       if (index > -1) {
         poll.pollOptions[index].votes++
       } else {
-        poll.pollOptions.push({ option: req.body.customSelection, votes: 1 })
+        const customIndex = poll.pollOptions
+          .map(({ option }) => option)
+          .indexOf(req.body.customSelection)
+        if (customIndex > -1) {
+          return res
+            .status(304)
+            .send({ msg: 'Custom option is the same as a predefined option' })
+        } else {
+          poll.pollOptions.push({ option: req.body.customSelection, votes: 1 })
+        }
       }
       poll
         .save()
