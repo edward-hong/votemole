@@ -45,6 +45,7 @@ const StatusIcon = styled(FontAwesome)`
 const AlertTemplate = ({ style, options, message, close }) => (
   <Alert type={options.type} style={style}>
     <StatusIcon
+      data-testid="status-icon"
       name={
         equals(options.type, 'success')
           ? 'check-circle'
