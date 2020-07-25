@@ -10,7 +10,7 @@ describe('AlertTemplate', () => {
     const message = 'hello'
     const close = jest.fn()
 
-    const container = render(
+    render(
       <AlertTemplate
         style={style}
         options={options}

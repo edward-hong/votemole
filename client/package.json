@@ -38,17 +38,18 @@
     "test:coverage": "npm t -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!src/index.js",
       "!src/constants.js",
       "!src/setupProxy.js",
-      "!src/serviceWorker.js"
+      "!src/serviceWorker.js",
+      "!src/test-utils/**/*.js"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
